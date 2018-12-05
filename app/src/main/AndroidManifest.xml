@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Login" />
+        <activity android:name=".Signup" />
+        <activity android:name=".SignupOption" />
+        <activity android:name=".PhoneAuthentication" />
+        <activity
+            android:name=".MapScreen"
+            android:label="@string/title_activity_map_screen"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+     android:background="@color/Blue"
+    android:layout_height="match_parent"
+    tools:context=".PhoneAuthentication">
+
+
+    <EditText
+        android:id="@+id/Phonenum"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="71dp"
+
+        android:layout_marginTop="84dp"
+        android:background="@color/White"
+
+        android:ems="10"
+        android:hint="@string/phonenum"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/authtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Phonenum"
+        android:layout_toEndOf="@+id/imageView2"
+        android:ems="10"
+        android:hint="@string/Auth_code"
+        android:inputType="number"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/phonenumtextview"
+        android:layout_width="311dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="@string/enter_your_phone_number_below"
+
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/Verifybt"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/border"
+        android:text="@string/verify" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="49dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/Phonenum"
+        android:layout_marginStart="56dp"
+        app:srcCompat="@drawable/ic_smartphone_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    <Button
+        android:id="@+id/verifycode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="202dp"
+        android:text="Button" />
+
+</RelativeLayout>

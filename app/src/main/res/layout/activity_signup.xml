@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+android:background="@color/Blue"
+    android:layout_height="match_parent"
+    tools:context=".Signup">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/fab_margin"
+android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="UselessLeaf,UselessParent"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="23dp"
+        android:weightSum="1">
+
+
+        <EditText
+            android:id="@+id/EMAIL"
+            android:layout_width="250dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:background="@color/White"
+            android:ems="10"
+            android:hint="@string/Email"
+            android:inputType="textEmailAddress" />
+
+
+        <EditText
+            android:id="@+id/Passwordtext"
+            android:layout_width="252dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:background="@color/White"
+            android:ems="10"
+            android:hint="********"
+            android:inputType="textPassword" />
+
+        <ProgressBar
+            android:id="@+id/progressBarg"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/Nametext"
+            android:layout_width="259dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:background="@color/White"
+            android:text="Enter Your Name"
+
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/Cnictext"
+            android:layout_width="257dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/White"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="CNIC number" />
+
+        <Button
+            android:id="@+id/Signupbt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+
+            android:background="@drawable/border"
+            android:text="@string/Signupbutton"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -23,7 +23,7 @@
         android:textStyle="normal" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/Loginbt"
         android:layout_width="206dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -34,17 +34,15 @@
         android:gravity="center"
         android:text="@string/Loginbt" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/Signupbt"
+        android:layout_width="373dp"
+        android:background="@color/Blue"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp"
-        android:background="@color/Blue"
-        android:gravity="center"
+        android:layout_alignStart="@+id/Title"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="-64dp"
+        android:text="Dont have account Signup" />
 
-        android:text="@string/Signupbt"
-        android:textColor="@color/Black"
-        android:textSize="20sp"
-        android:textStyle="normal" />
 </RelativeLayout>

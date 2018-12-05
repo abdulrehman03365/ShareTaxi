@@ -1,6 +1,28 @@
 <resources>
     <string name="app_name">ShareTaxi</string>
     <string name="Loginbt">Login</string>
-    <string name="Signupbt">Dont have account signup ?</string>
+    <string name="Signupbt">Signupbt</string>
     <string name="Title">Share Taxi</string>
+    <string name="Loginbt2">Login</string>
+    <string name="email_hint">Enter Email</string>
+    <string name="pass">Enter Password</string>
+    <string name="Signupbutton">Continue to Signup</string>
+    <string name="Emailtext">Enter your email</string>
+    <string name="Email">Email</string>
+    <string name="signup_as_rider">Signup as Rider</string>
+    <string name="signup_as_driver">Signup as Driver</string>
+    <string name="verify">Verify</string>
+    <string name="enter_your_phone_number_below">Enter your Phone number below</string>
+    <string name="auth_android_string_fingerprint_icon_content_description">Auth @android:string/fingerprint_icon_content_description</string>
+    <string name="Auth_code">Auth code</string>
+    <string name="title_activity_map_screen">MapScreen</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="phonenum">+923032567162</string>
+    <string name="phonenumstring">phoennumstring</string>
+
 </resources>

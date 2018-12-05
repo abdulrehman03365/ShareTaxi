@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#62635a"
+    tools:context=".Login">
+
+
+    <EditText
+        android:id="@+id/EMAIL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+
+        android:ems="10"
+        android:hint="@string/email_hint"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColorHint="@color/White"
+        tools:ignore="TextFields" />
+
+    <EditText
+        android:id="@+id/PASS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/EMAIL"
+        android:layout_alignStart="@+id/EMAIL"
+        android:layout_below="@+id/EMAIL"
+        android:textColorHint="@color/White"
+        android:layout_marginTop="57dp"
+        android:background="#62635a"
+        android:ems="10"
+        android:hint="@string/pass"
+        android:inputType="textPassword"
+        android:padding="10sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+
+
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="238dp"
+        android:layout_marginStart="156dp"
+        android:indeterminate="true"
+        android:scrollbarSize="30dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/LoginRiderbt"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="209dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="93dp"
+        android:background="@drawable/border"
+        android:onClick="Loginbuttonclicked"
+        android:text="Login as Rider"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/LoginDriverbt"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="209dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="165dp"
+        android:background="@drawable/border"
+        android:text="Login as Driver" />
+
+
+    <TextView
+        android:id="@+id/PasswordRecoveryView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:text="Forget Password Recover by Email"
+        android:textColor="@color/White"
+        android:textSize="17dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="30dp"
+        android:layout_height="37dp"
+        android:layout_alignBottom="@+id/EMAIL"
+        android:layout_toStartOf="@+id/EMAIL"
+        app:srcCompat="@drawable/ic_email_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="212dp"
+        android:layout_toStartOf="@+id/EMAIL"
+        app:srcCompat="@drawable/ic_lock_outline_black_24dp" />
+
+
+</RelativeLayout>
