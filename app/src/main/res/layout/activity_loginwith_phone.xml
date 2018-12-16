@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-     android:background="@color/light"
+    android:background="@color/light"
     android:layout_height="match_parent"
     tools:context=".PhoneAuthentication">
 
@@ -11,7 +11,7 @@
     android:background="@color/light"
 
     <EditText
-        android:id="@+id/Phonenumlog"
+        android:id="@+id/Phonenum"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"

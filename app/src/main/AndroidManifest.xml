@@ -16,10 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
+        <activity android:name=".LoginwithEmail" />
         <activity android:name=".Signup" />
         <activity android:name=".SignupOption" />
         <activity android:name=".PhoneAuthentication" />
+        <activity android:name=".LoginwithPhone" />
+        <activity android:name=".LinkphonewithCredential" />
         <activity
             android:name=".MapScreen"
             android:label="@string/title_activity_map_screen"

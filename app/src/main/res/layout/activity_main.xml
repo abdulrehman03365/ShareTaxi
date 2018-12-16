@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-   android:background="#E9FF54"
+   android:background="@color/light"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:gravity="center"
-        android:text="@string/Title"
-        android:textSize="50sp"
-
-        android:textColor="@color/Black"
-        android:textStyle="normal" />
 
     <Button
         android:id="@+id/Loginbt"
@@ -37,12 +24,37 @@
     <Button
         android:id="@+id/Signupbt"
         android:layout_width="373dp"
-        android:background="@color/Blue"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/Title"
+        android:layout_alignParentEnd="true"
         android:layout_marginBottom="24dp"
-        android:layout_marginStart="-64dp"
+        android:background="@color/light"
         android:text="Dont have account Signup" />
+
+    <Button
+        android:id="@+id/LoginwithEmailbt"
+    android:drawableLeft="@drawable/ic_email_black_24dp"
+android:backgroundTint="@color/light"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="244dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:text="Login with Email" />
+
+    <Button
+        android:id="@+id/LoginwithPhonebt"
+        android:layout_width="178dp"
+        android:drawableLeft="@drawable/ic_smartphone_black_24dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="183dp"
+        android:background="@drawable/border"
+        android:backgroundTint="@color/light"
+        android:gravity="center"
+        android:text="Login with Phone" />
 
 </RelativeLayout>

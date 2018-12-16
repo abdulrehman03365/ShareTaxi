@@ -1,83 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-android:background="@color/Blue"
-    android:layout_height="match_parent"
-    tools:context=".Signup">
+android:background="@color/light"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/EMAIL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="159dp"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:ems="10"
+        android:hint=" Email"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColorHint="@color/White"
+       />
+
+    <EditText
+        android:id="@+id/PASS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="213dp"
+        android:background="@color/light"
+        android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+        android:ems="10"
+        android:hint="@string/pass"
+        android:inputType="textPassword"
+        android:padding="10sp"
+        android:textColorHint="@color/White" />
+
+    <ProgressBar
+        android:id="@+id/progressBar11"
 
 
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/fab_margin"
-android:gravity="center"
-        android:orientation="vertical"
-        tools:ignore="UselessLeaf,UselessParent"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="23dp"
-        android:weightSum="1">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="238dp"
+        android:layout_marginStart="156dp"
+        android:indeterminate="true"
+        android:scrollbarSize="30dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/Signupbt"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="84dp"
+        android:background="@drawable/border"
+        android:text="Signup" />
 
 
-        <EditText
-            android:id="@+id/EMAIL"
-            android:layout_width="250dp"
-            android:layout_height="58dp"
-            android:layout_marginTop="@dimen/fab_margin"
-            android:background="@color/White"
-            android:ems="10"
-            android:hint="@string/Email"
-            android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/Nametxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/EMAIL"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-159dp"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:ems="10"
+        android:hint="Name"
+        android:textColorHint="@color/White"
+        android:inputType="textPersonName"
+        android:textColor="@color/White" />
+
+    <EditText
+        android:id="@+id/phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="57dp"
+        android:drawableLeft="@drawable/ic_smartphone_black_24dp"
+        android:ems="10"
+        android:hint="+923087654387"
+        android:inputType="phone"
+        android:textColorHint="@color/White" />
 
 
-        <EditText
-            android:id="@+id/Passwordtext"
-            android:layout_width="252dp"
-            android:layout_height="57dp"
-            android:layout_marginTop="@dimen/fab_margin"
-            android:background="@color/White"
-            android:ems="10"
-            android:hint="********"
-            android:inputType="textPassword" />
-
-        <ProgressBar
-            android:id="@+id/progressBarg"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/Nametext"
-            android:layout_width="259dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="@dimen/fab_margin"
-            android:background="@color/White"
-            android:text="Enter Your Name"
-
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/Cnictext"
-            android:layout_width="257dp"
-            android:layout_height="57dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/White"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="CNIC number" />
-
-        <Button
-            android:id="@+id/Signupbt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-
-            android:background="@drawable/border"
-            android:text="@string/Signupbutton"
-            android:textSize="20sp" />
-
-    </LinearLayout>
 </RelativeLayout>

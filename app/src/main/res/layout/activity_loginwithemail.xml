@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#62635a"
-    tools:context=".Login">
+    android:background="#7E57C2"
+
+    tools:context=".LoginwithEmail">
 
 
     <EditText
@@ -32,7 +33,7 @@
         android:layout_below="@+id/EMAIL"
         android:textColorHint="@color/White"
         android:layout_marginTop="57dp"
-        android:background="#62635a"
+        android:background="#7E57C2"
         android:ems="10"
         android:hint="@string/pass"
         android:inputType="textPassword"
@@ -48,25 +49,12 @@
 
 
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="238dp"
-        android:layout_marginStart="156dp"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="240dp"
         android:indeterminate="true"
         android:scrollbarSize="30dp"
         android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/LoginRiderbt"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="209dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="93dp"
-        android:background="@drawable/border"
-        android:onClick="Loginbuttonclicked"
-        android:text="Login as Rider"
-        tools:ignore="OnClick" />
 
     <Button
         android:id="@+id/LoginDriverbt"
@@ -75,9 +63,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="165dp"
+        android:layout_marginBottom="93dp"
         android:background="@drawable/border"
-        android:text="Login as Driver" />
+
+        android:text="Login as Driver"
+        tools:ignore="OnClick" />
 
 
     <TextView
@@ -97,7 +87,8 @@
         android:layout_width="30dp"
         android:layout_height="37dp"
         android:layout_alignBottom="@+id/EMAIL"
-        android:layout_toStartOf="@+id/EMAIL"
+        android:layout_toLeftOf="@+id/EMAIL"
+
         app:srcCompat="@drawable/ic_email_black_24dp" />
 
     <ImageView
@@ -106,8 +97,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="212dp"
-        android:layout_toStartOf="@+id/EMAIL"
+        android:layout_toLeftOf="@+id/EMAIL"
+
         app:srcCompat="@drawable/ic_lock_outline_black_24dp" />
+
+    <Button
+        android:id="@+id/Rider"
+        android:layout_width="193dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="154dp"
+        android:background="@drawable/border"
+        android:text="Login as Rider" />
 
 
 </RelativeLayout>
