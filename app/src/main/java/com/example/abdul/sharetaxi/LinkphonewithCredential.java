@@ -27,20 +27,21 @@ FirebaseAuth mAuth;
 PhoneAuthCredential phoneAuthCredential;
 ProgressBar Progressbar;
 PhoneAuthProvider.OnVerificationStateChangedCallbacks mcallback;
-String mverificationId;
+String mverificationId="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_linkphonewith_credential);
 
+        setContentView(R.layout.activity_linkphonewith_credential);
+        super.onCreate(savedInstanceState);
     Authtext= findViewById(R.id.authtxt);
-    Verifybutton = findViewById(R.id.Verifybt);
+    Verifybutton = findViewById(R.id.submitbt);
     Progressbar = findViewById(R.id.progressBar11);
     Submit= findViewById(R.id.submitbt);
     checkforSignupscenerio();
     initvercallback();
     Progressbar.setVisibility(View.VISIBLE);
+
     PhoneAuthProvider.getInstance().verifyPhoneNumber(Phonenumstring,60, TimeUnit.SECONDS,LinkphonewithCredential.this,mcallback);
 
 Submit.setOnClickListener(new View.OnClickListener() {

@@ -46,14 +46,14 @@
             tools:text="Verification Email send" />
 
         <Button
-            android:id="@+id/Proceedbt"
-            android:gravity="center"
+            android:id="@+id/dialogProceedbt"
             android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="11dp"
             android:background="@drawable/border"
+            android:gravity="center"
             android:text="Proceed" />
     </RelativeLayout>
 

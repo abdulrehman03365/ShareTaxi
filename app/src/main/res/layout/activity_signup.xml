@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-android:background="@color/light"
+    android:background="@color/light"
     android:layout_height="match_parent">
 
     <EditText
@@ -20,7 +20,7 @@ android:background="@color/light"
         android:inputType="text"
         android:padding="10dp"
         android:textColorHint="@color/White"
-       />
+        android:visibility="visible" />
 
     <EditText
         android:id="@+id/PASS"
@@ -35,7 +35,8 @@ android:background="@color/light"
         android:hint="@string/pass"
         android:inputType="textPassword"
         android:padding="10sp"
-        android:textColorHint="@color/White" />
+        android:textColorHint="@color/White"
+        android:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progressBar11"
@@ -46,9 +47,8 @@ android:background="@color/light"
         android:layout_height="wrap_content"
 
 
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="238dp"
+        android:layout_below="@+id/cnicno"
         android:layout_marginStart="156dp"
         android:indeterminate="true"
         android:scrollbarSize="30dp"
@@ -63,7 +63,8 @@ android:background="@color/light"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="84dp"
         android:background="@drawable/border"
-        android:text="Signup" />
+        android:text="Signup"
+        android:visibility="visible" />
 
 
     <EditText
@@ -76,9 +77,20 @@ android:background="@color/light"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:ems="10"
         android:hint="Name"
-        android:textColorHint="@color/White"
         android:inputType="textPersonName"
-        android:textColor="@color/White" />
+        android:textColor="@color/White"
+        android:textColorHint="@color/White"
+        android:visibility="visible" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/driverimage"
+        android:layout_width="117dp"
+        android:layout_height="113dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp"
+        android:background="@drawable/ic_camera_alt_black_24dp"
+        android:visibility="visible" />
 
     <EditText
         android:id="@+id/phonenumber"
@@ -91,7 +103,59 @@ android:background="@color/light"
         android:ems="10"
         android:hint="+923087654387"
         android:inputType="phone"
-        android:textColorHint="@color/White" />
+        android:textColorHint="@color/White"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/cnicno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/carnumber"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="EnterCnicno"
+        android:inputType="textPersonName|number" />
+
+    <EditText
+        android:id="@+id/carcolour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/carmodel"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Car Colour"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/carnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/carcolour"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="CarNumber"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/carmodel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="184dp"
+        android:ems="10"
+        android:hint="Car Model"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/proceeddrbt"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp"
+        android:background="@drawable/border"
+        android:text="Proceed" />
 
 
 </RelativeLayout>

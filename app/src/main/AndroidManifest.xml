@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.abdul.sharetaxi">
+    <uses-permission android:name="android.permission.CAMERA"  android:required="true" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"  android:required="true" />
+   <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" android:required="true"
+       tools:ignore="ProtectedPermissions" />
+       tools:ignore="ProtectedPermissions" />
+
+       tools:ignore="ProtectedPermissions" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:required="true" />
 
     <application
         android:allowBackup="true"
