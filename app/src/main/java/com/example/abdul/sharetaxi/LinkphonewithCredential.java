@@ -1,5 +1,6 @@
 package com.example.abdul.sharetaxi;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ PhoneAuthProvider.OnVerificationStateChangedCallbacks mcallback;
     EditText editTextCarrierNumber;
 String mverificationId="";
 CountryCodePicker ccp;
-
+ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,17 +42,19 @@ CountryCodePicker ccp;
     Verifybutton = findViewById(R.id.submitbt);
     Progressbar = findViewById(R.id.progressBar11);
     Submit= findViewById(R.id.submitbt);
-        ccp = (CountryCodePicker) findViewById(R.id.ccp);
-        ccp.registerCarrierNumberEditText(editTextCarrierNumber);
-    checkforSignupscenerio();
+       // ccp = (CountryCodePicker) findViewById(R.id.ccp);
+     //   ccp.registerCarrierNumberEditText(editTextCarrierNumber);
+    progressDialog = new ProgressDialog(LinkphonewithCredential.this);
+        checkforSignupscenerio();
     initvercallback();
-    Progressbar.setVisibility(View.VISIBLE);
-
+    progressDialog.setMessage("Sending code");
+         progressDialog.show();
     PhoneAuthProvider.getInstance().verifyPhoneNumber(Phonenumstring,60, TimeUnit.SECONDS,LinkphonewithCredential.this,mcallback);
 
 Submit.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
+   progressDialog.dismiss();
         mAuth = FirebaseAuth.getInstance();
         Code=Authtext.getText().toString();
         if(Code!=" ") {
@@ -77,6 +80,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onVerificationFailed(FirebaseException e) {
         Log.e(tag,e.getMessage());
+        progressDialog.dismiss();
             Toast.makeText(LinkphonewithCredential.this, String.valueOf(e.getMessage()), Toast.LENGTH_SHORT).show();
             Progressbar.setVisibility(View.GONE);
 
