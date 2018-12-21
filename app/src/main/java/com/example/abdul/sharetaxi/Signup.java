@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -41,6 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hbb20.CountryCodePicker;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -75,9 +77,11 @@ public class Signup extends AppCompatActivity {
     private String Phnumformat="^\\+";
     private boolean DriverEmptyfields;
     //StorageReference storageReference;
-
+    CountryCodePicker ccp;
+    EditText editTextCarrierNumber;
     CharSequence[] items;
     private int i;
+    ProgressDialog progressDialog;
     private int REQUEST_CAMERA=0;
     private int SElect_FILE=1;
     private int REQUEST_External=11;
@@ -92,6 +96,9 @@ public class Signup extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_signup);
+
+
+
         Log.e(Tag,"signup layout parsed");
 
 
@@ -125,13 +132,19 @@ public class Signup extends AppCompatActivity {
         Carmodeltxt.setVisibility(View.INVISIBLE);
         Cninumbertxt.setVisibility(View.INVISIBLE);
         Proceeddriverbt.setVisibility(View.INVISIBLE);
-        Driversimage.setVisibility(View.INVISIBLE);
+        progressDialog = new ProgressDialog(Signup.this);
+
+         Driversimage.setVisibility(View.INVISIBLE);
         Driversimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ShowImgdialog();
             }
         });
+        ccp = (CountryCodePicker) findViewById(R.id.ccp1);
+        editTextCarrierNumber = findViewById(R.id.editText_carrierNumber1);
+
+        ccp.registerCarrierNumberEditText(editTextCarrierNumber);
 
         Signupbt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,14 +180,14 @@ public class Signup extends AppCompatActivity {
                 if(checkemptydriverfields()==true || imageupload==true)
                 {
 
-                        Toast toast = Toast.makeText(Signup.this, "Image and Data must be filled", Toast.LENGTH_LONG);
-                        toast.show();
+                    Toast toast = Toast.makeText(Signup.this, "Image and Data must be filled", Toast.LENGTH_LONG);
+                    toast.show();
 
                 }
                 else
                 {
-                     Cardetailsupload();
-                     End();
+                    Cardetailsupload();
+                    End();
                 }
             }
         });
@@ -190,7 +203,9 @@ public class Signup extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         firebaseUser=mAuth.getCurrentUser();
         Uid=firebaseUser.getUid();
-        progressBar.setVisibility(View.VISIBLE);
+
+        progressDialog.setMessage("Car Details Uploading");
+        progressDialog.show();
         db.child(Uid).child("Carnumber").setValue(Carnumber);
         db.child(Uid).child("Carmodel").setValue(Carmodel);
         db.child(Uid).child("Carcolour").setValue(Carcolour);
@@ -199,13 +214,14 @@ public class Signup extends AppCompatActivity {
         Log.e(Tag,"Car Detalis uploaded");
         Toast toast = Toast.makeText(Signup.this,"Driver Succesfuly Login",Toast.LENGTH_LONG);
         toast.show();
-        progressBar.setVisibility(View.INVISIBLE);
+        progressDialog.dismiss();
+
 
 
     }
 
     private boolean Checkemptydriversimage() {
-    return  true;
+        return  true;
     }
 
 
@@ -217,7 +233,8 @@ public class Signup extends AppCompatActivity {
 
     private void SignupUser() {
         Log.e(Tag, String.valueOf("Inside Signup user"));
-        progressBar.setVisibility(View.VISIBLE);
+        progressDialog.setMessage("Signing In");
+        progressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(Email,Password)
                 .addOnCompleteListener(Signup.this, new OnCompleteListener<AuthResult>() {
@@ -227,23 +244,23 @@ public class Signup extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.e(TAG, "createUserWithEmail:success");
                             //    FirebaseUser user = mAuth.getCurrentUser();
+                           progressDialog.dismiss();
 
-                          progressBar.setVisibility(View.INVISIBLE);
                             //  Toast.makeText(Signup.this, "Succesfully Signup.", Toast.LENGTH_SHORT).show();
                             //
                             Emailverification();
 
                             Uploadinguserdata();
 
-
-                             progressBar.setVisibility(View.INVISIBLE);
+                             progressDialog.dismiss();
+                          //  progressBar.setVisibility(View.INVISIBLE);
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e(TAG, "createUserWithEmail:failure", task.getException());
 
-                            progressBar.setVisibility(View.INVISIBLE);
-
+                           // progressBar.setVisibility(View.INVISIBLE);
+                            progressDialog.dismiss();
 
                             Toast.makeText(Signup.this, String.valueOf(task.getException()), Toast.LENGTH_SHORT).show();
 
@@ -291,14 +308,15 @@ public class Signup extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         firebaseUser=mAuth.getCurrentUser();
         Uid=firebaseUser.getUid();
-
+        progressDialog.setMessage("Uploading Data");
         db.child(Uid).child("Phonenumber").setValue(Phonenumber);
         db.child(Uid).child("Email").setValue(Email);
         db.child(Uid).child("Password").setValue(Password);
         db.child(Uid).child("Name").setValue(Name);
 
         Log.e(Tag,"DATA UPLOADLOADED TO DATABASE");
-        progressBar.setVisibility(View.INVISIBLE);
+       progressDialog.dismiss();
+        //progressBar.setVisibility(View.INVISIBLE);
         Showdialogbox();
 
         //Toast.makeText(Signup.this, " Succesfully Registerd", Toast.LENGTH_LONG).show();
@@ -358,7 +376,7 @@ public class Signup extends AppCompatActivity {
     private void Uploaddriverdata() {
 
         Handlevisibility();
-            
+
        /* if (checkSelfPermission(Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA},
@@ -378,6 +396,7 @@ public class Signup extends AppCompatActivity {
 
                 else
                     Log.e(Tag,"Drivers data Enterd");
+
                 progressBar.setVisibility(View.VISIBLE);
                 //ShowImgdialog();
 
@@ -403,7 +422,7 @@ public class Signup extends AppCompatActivity {
         AlertDialog.Builder  builder = new AlertDialog.Builder(Signup.this);
         builder.setTitle("Select Image");
         builder.setItems(items, new DialogInterface.OnClickListener() {
-           
+
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(items[i].equals("Camera"))
@@ -412,7 +431,7 @@ public class Signup extends AppCompatActivity {
 
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     //intent.setType("images/*");
-         //           checkforpermission();
+                    //           checkforpermission();
                     startActivityForResult(intent,REQUEST_CAMERA);
 
                 }
@@ -428,7 +447,7 @@ public class Signup extends AppCompatActivity {
 
 
 
-        protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
+    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
         try{
@@ -437,12 +456,12 @@ public class Signup extends AppCompatActivity {
 
             if (resultCode == Activity.RESULT_OK) {
                 if (requestCode == REQUEST_CAMERA ) {
-               // Uri    URI=  data.getData();
+                    // Uri    URI=  data.getData();
                     Bundle bundle = data.getExtras();
-              //      Uri  imageURI= (Uri) bundle.get("data");
+                    //      Uri  imageURI= (Uri) bundle.get("data");
 
 
-                   //
+                    //
                     Bitmap bmp = (Bitmap) bundle.get("data");
 
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -457,7 +476,7 @@ public class Signup extends AppCompatActivity {
 
                     Glide.with(this).load(bmp).into(Driversimage);
                     //Driversimage.setImageBitmap(bmp);
-                   uploadimage(URI);
+                    uploadimage(URI);
                 } else if (requestCode == SElect_FILE) {
                     Uri imageuri = data.getData();
                     Glide.with(this).load(imageuri).into(Driversimage);
@@ -486,40 +505,43 @@ public class Signup extends AppCompatActivity {
     {
         StorageReference storage;
         storage= FirebaseStorage.getInstance().getReference();
-      this.URI=URI;
-      Log.d(Tag,String.valueOf(this.URI));
+        this.URI=URI;
+        Log.d(Tag,String.valueOf(this.URI));
         FirebaseUser currentUser= mAuth.getCurrentUser();
         StorageReference storageRef = storage.child(currentUser.getUid() + "/" + "Profilepic").child(this.URI.getLastPathSegment());
  /* DatabaseReference databaseRefere;
 
     storageRef=storageRef.child(currentUser.getUid() + "/" + "Profilepic").child(URI.getLastPathSegment());*/
-        progressBar.setVisibility(View.VISIBLE);
-    storageRef.putFile(URI).addOnFailureListener(new OnFailureListener() {
+ progressDialog.setMessage("Image Uploading");
+ progressDialog.show();
 
-        @Override
-        public void onFailure(@NonNull Exception e) {
+        storageRef.putFile(URI).addOnFailureListener(new OnFailureListener() {
 
-        }
-    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
 
-
-        @Override
-        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-            Log.d(TAG,"Profile image UPLOADED");
-            imageupload=false;
-                 progressBar.setVisibility(View.INVISIBLE);
-            Toast toast = Toast.makeText(Signup.this,"Image uploaded",Toast.LENGTH_LONG);
-            toast.show();
-
-        }
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
 
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d(TAG,"Profile image UPLOADED");
+                imageupload=false;
 
-    });
+               progressDialog.dismiss();
+                Toast toast = Toast.makeText(Signup.this,"Image uploaded",Toast.LENGTH_LONG);
+                toast.show();
+
+            }
+
+
+
+        });
 
 
         //StorageReference storageRef =;
-    //Intent intent = new Intent(Intent.ACTION_PICK,)
+        //Intent intent = new Intent(Intent.ACTION_PICK,)
 
     }
 
@@ -527,7 +549,8 @@ public class Signup extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void Handlevisibility() {
 
-        progressBar.setVisibility(View.INVISIBLE);
+
+        progressDialog.dismiss();
         Carnumbertxt.setVisibility(View.VISIBLE);
         Carcolourtxt.setVisibility(View.VISIBLE);
         Carmodeltxt.setVisibility(View.VISIBLE);
@@ -536,17 +559,17 @@ public class Signup extends AppCompatActivity {
         DialogProceedbt.setVisibility(View.VISIBLE);
         Proceeddriverbt.setVisibility(View.VISIBLE);
         Signupbt.setVisibility(View.GONE);
-      Phonenumbertext.setVisibility(View.GONE);
-    Nametext.setVisibility(View.GONE);
-    Emailtext.setVisibility(View.GONE);
-    Passwordtext.setVisibility(View.GONE);
-checkforpermission();
+        Phonenumbertext.setVisibility(View.GONE);
+        Nametext.setVisibility(View.GONE);
+        Emailtext.setVisibility(View.GONE);
+        Passwordtext.setVisibility(View.GONE);
+        checkforpermission();
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkforpermission() {
-    Log.e(TAG,"Asking for permissions");
+        Log.e(TAG,"Asking for permissions");
 
         Dexter.withActivity(this)
                 .withPermissions(
@@ -557,31 +580,31 @@ checkforpermission();
 
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
- if(report.isAnyPermissionPermanentlyDenied())
- {
+                if(report.isAnyPermissionPermanentlyDenied())
+                {
 
- }
- if(report.areAllPermissionsGranted()!=true)
- {
-     AlertDialog.Builder builder = new AlertDialog.Builder(Signup.this);
-     builder.setTitle("Permission Needed");
-     builder.setMessage("You Denied Camera And storage Permission which are necessory now go to setting to enable them");
-     builder.show();
-     builder.setPositiveButton("Goto Settings", new DialogInterface.OnClickListener() {
-         @Override
-         public void onClick(DialogInterface dialog, int which) {
-             dialog.cancel();
-             opensetting();
-         }
-     });
-builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-   dialog.cancel();
-    }
-});
- builder.show();
- }
+                }
+                if(report.areAllPermissionsGranted()!=true)
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Signup.this);
+                    builder.setTitle("Permission Needed");
+                    builder.setMessage("You Denied Camera And storage Permission which are necessory now go to setting to enable them");
+                    builder.show();
+                    builder.setPositiveButton("Goto Settings", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            opensetting();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                }
 
             }
 
@@ -619,7 +642,7 @@ builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri =  Uri.fromParts("package",getPackageName(),null);
         intent.setData(uri);
- startActivity(intent);
+        startActivity(intent);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -631,18 +654,18 @@ builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
         boolean cam = grantResults[0]!=PackageManager.PERMISSION_GRANTED;
 
         boolean store = grantResults[1]!=PackageManager.PERMISSION_GRANTED;
-if(store==false || cam ==false)
-{
-    checkforpermission();
-}
+        if(store==false || cam ==false)
+        {
+            checkforpermission();
+        }
 
     }
 
     private boolean checkemptydriverfields() {
-    Carnumber = Carnumbertxt.getText().toString();
+        Carnumber = Carnumbertxt.getText().toString();
         Carcolour = Carcolourtxt.getText().toString();
         Carmodel = Carmodeltxt.getText().toString();
-       Cnicnumber = Cninumbertxt.getText().toString();
+        Cnicnumber = Cninumbertxt.getText().toString();
         if(TextUtils.isEmpty(Carmodel)||TextUtils.isEmpty(Carcolour)
                 ||TextUtils.isEmpty(Carnumber)||TextUtils.isEmpty(Cnicnumber))
 
@@ -686,11 +709,11 @@ if(store==false || cam ==false)
 
     public void    checkfornull() {
         //Name = Nametext.getText().toString();
-
+        Phonenumber=ccp.getFormattedFullNumber();
         Name = Nametext.getText().toString();
         Email = Emailtext.getText().toString();
         Password = Passwordtext.getText().toString();
-        Phonenumber = Phonenumbertext.getText().toString();
+        //Phonenumber = Phonenumbertext.getText().toString();
         if (TextUtils.isEmpty(Email) || TextUtils.isEmpty(Password) || TextUtils.isEmpty(Name) || TextUtils.isEmpty(Phonenumber)) {
             setEmptytextfield(true);
             if(Name.isEmpty() )
@@ -709,12 +732,7 @@ if(store==false || cam ==false)
 
 
             }
-            if(Email.isEmpty() )
-            {
-                Emailtext.setError("Enter the Email");
 
-
-            }
 
 
 

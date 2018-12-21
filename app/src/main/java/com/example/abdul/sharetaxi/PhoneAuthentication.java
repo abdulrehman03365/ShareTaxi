@@ -59,7 +59,7 @@ public class PhoneAuthentication extends AppCompatActivity {
         ccp.registerCarrierNumberEditText(editTextCarrierNumber);
         final EditText Authtext = findViewById(R.id.authtxt);
         initProgressDialogBox();
- EnterText = findViewById(R.id.EnterText);
+        EnterText = findViewById(R.id.EnterText);
         mAuth =FirebaseAuth.getInstance();
         Authtext.setVisibility(View.GONE);
         Submitcode.setVisibility(View.GONE);

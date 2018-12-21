@@ -14,6 +14,7 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.hbb20.CountryCodePicker;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +28,9 @@ FirebaseAuth mAuth;
 PhoneAuthCredential phoneAuthCredential;
 ProgressBar Progressbar;
 PhoneAuthProvider.OnVerificationStateChangedCallbacks mcallback;
+    EditText editTextCarrierNumber;
 String mverificationId="";
+CountryCodePicker ccp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ String mverificationId="";
     Verifybutton = findViewById(R.id.submitbt);
     Progressbar = findViewById(R.id.progressBar11);
     Submit= findViewById(R.id.submitbt);
+        ccp = (CountryCodePicker) findViewById(R.id.ccp);
+        ccp.registerCarrierNumberEditText(editTextCarrierNumber);
     checkforSignupscenerio();
     initvercallback();
     Progressbar.setVisibility(View.VISIBLE);
@@ -54,6 +59,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
         }
             mAuth.getCurrentUser().linkWithCredential(phoneAuthCredential);
         Log.e(tag,"Succesfuly linked with credential");
+
         Toast.makeText(LinkphonewithCredential.this, "Succesfully Signup.", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LinkphonewithCredential.this,MainActivity.class);
         startActivity(intent);
