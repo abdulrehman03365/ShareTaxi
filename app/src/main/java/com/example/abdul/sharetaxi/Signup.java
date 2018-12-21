@@ -157,7 +157,6 @@ public class Signup extends AppCompatActivity {
 
 
                 } else {
-                    Toast.makeText(Signup.this, "Data Enterd", Toast.LENGTH_SHORT).show();
                     Log.e(Tag,"Data Enterd");
                     SignupUser();
 
@@ -559,7 +558,8 @@ public class Signup extends AppCompatActivity {
         DialogProceedbt.setVisibility(View.VISIBLE);
         Proceeddriverbt.setVisibility(View.VISIBLE);
         Signupbt.setVisibility(View.GONE);
-        Phonenumbertext.setVisibility(View.GONE);
+        ccp.setVisibility(View.INVISIBLE);
+        editTextCarrierNumber.setVisibility(View.INVISIBLE);
         Nametext.setVisibility(View.GONE);
         Emailtext.setVisibility(View.GONE);
         Passwordtext.setVisibility(View.GONE);
