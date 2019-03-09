@@ -61,6 +61,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
             phoneAuthCredential = PhoneAuthProvider.getCredential(mverificationId, Code);
         }
             mAuth.getCurrentUser().linkWithCredential(phoneAuthCredential);
+
         Log.e(tag,"Succesfuly linked with credential");
 
         Toast.makeText(LinkphonewithCredential.this, "Succesfully Signup.", Toast.LENGTH_SHORT).show();
@@ -88,6 +89,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
 
         @Override
         public void onCodeSent(String verificationid, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            progressDialog.dismiss();
             mverificationId=verificationid;
             super.onCodeSent(verificationid, forceResendingToken);
             Verifybutton.setVisibility(View.GONE);

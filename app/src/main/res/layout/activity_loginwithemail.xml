@@ -31,14 +31,15 @@ android:drawableLeft="@drawable/ic_email_black_24dp"
         android:layout_alignLeft="@+id/EMAIL"
         android:layout_alignStart="@+id/EMAIL"
         android:layout_below="@+id/EMAIL"
-        android:textColorHint="@color/White"
         android:layout_marginTop="57dp"
         android:background="@color/light"
-        android:ems="10"
         android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+        android:ems="10"
         android:hint="@string/pass"
         android:inputType="textPassword"
-        android:padding="10sp" />
+        android:padding="10sp"
+        android:textColorHint="@color/White"
+        android:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -80,7 +81,7 @@ android:drawableLeft="@drawable/ic_email_black_24dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         android:text="Forget Password Recover by Email"
-        android:textColor="@color/light"
+        android:textColor="@color/White"
         android:textSize="17dp" />
 
     <Button
@@ -91,7 +92,28 @@ android:drawableLeft="@drawable/ic_email_black_24dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="154dp"
         android:background="@drawable/border"
-        android:text="Login as Rider" />
+        android:text="Login as Rider"
+        android:visibility="visible" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="176dp"
+        android:visibility="gone"
+        app:passwordToggleDrawable="@drawable/icon_selector"
+        app:passwordToggleEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="308dp"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+            android:hint="hint"
+
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
 
 
 </RelativeLayout>

@@ -29,7 +29,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="24dp"
         android:background="@color/light"
-        android:text="Dont have account Signup" />
+        android:text="Dont have account Signup"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/LoginwithEmailbt"
@@ -56,5 +57,50 @@ android:backgroundTint="@color/light"
         android:backgroundTint="@color/light"
         android:gravity="center"
         android:text="Login with Phone" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:text="Shared Car"
+        android:textColor="@color/White"
+        android:textSize="40dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="76dp"
+        android:layout_height="69dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="121dp"
+        app:srcCompat="@drawable/ic_local_taxi_black_24dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginBottom="40dp"
+        android:text="Dont Have a Account ?"
+        android:textColor="@color/White"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/Signuptxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-40dp"
+
+        android:text="Sign Up"
+        android:textColor="@color/White"
+        android:textSize="17dp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

@@ -54,12 +54,11 @@
         android:id="@+id/submit"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/Verifybt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="123dp"
         android:background="@drawable/border"
         android:text="Submit"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/Loginbt"
@@ -69,6 +68,6 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/border"
         android:text="Login"
-        android:visibility="gone" />
+        android:visibility="invisible" />
 
 </RelativeLayout>

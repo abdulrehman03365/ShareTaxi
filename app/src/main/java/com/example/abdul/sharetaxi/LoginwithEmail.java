@@ -16,12 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageException;
 
 public class LoginwithEmail extends AppCompatActivity  {
     public String Catagory,email ;
@@ -92,10 +94,10 @@ public class LoginwithEmail extends AppCompatActivity  {
                 email = Emailtext1.getText().toString();
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(LoginwithEmail.this, "First  Email", Toast.LENGTH_LONG).show();
-                  if(email.isEmpty())
-                  {
-                      Emailtext1.setError("Enter Valid Email");
-                  }
+                    if(email.isEmpty())
+                    {
+                        Emailtext1.setError("Enter Valid Email");
+                    }
                     if(password.isEmpty())
                     {
                         passwordtext1.setError("Enter Your Password");
@@ -106,7 +108,7 @@ public class LoginwithEmail extends AppCompatActivity  {
 
                 } else {
 
-sendverificationEmail();
+                    sendverificationEmail();
 
                 }
             }
@@ -123,10 +125,10 @@ sendverificationEmail();
                     password = passwordtext1.getText().toString();
                     Catagory="Rider";
                     if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-if(email.isEmpty())
-{
-    Emailtext1.setError("Enater valid Email");
-}
+                        if(email.isEmpty())
+                        {
+                            Emailtext1.setError("Enater valid Email");
+                        }
                         if(password.isEmpty())
                         {
                             passwordtext1.setError("Enater your Password");
@@ -182,7 +184,7 @@ if(email.isEmpty())
                     progressDialog.dismiss();
                     Checkemailverification();
                     progressDialog.dismiss();
-                    Intent intent = new Intent(LoginwithEmail.this, MapScreen.class);
+                    Intent intent = new Intent(LoginwithEmail.this, MapsActivity.class);
                     intent.putExtra("desc", Catagory);
                     startActivity(intent);
 
@@ -192,6 +194,9 @@ if(email.isEmpty())
                     Log.e(TAG, String.valueOf(task.getException()));
 
                     Toast.makeText(LoginwithEmail.this, String.valueOf(task.getException()), Toast.LENGTH_LONG).show();
+
+
+
                 }
             }
         });
@@ -229,7 +234,4 @@ if(email.isEmpty())
     }
 
 }
-
-
-
 

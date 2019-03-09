@@ -5,10 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private String Status;
+    TextView Signupbt;
+
 int parity=1;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -16,9 +19,9 @@ int parity=1;
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
+        Signupbt= findViewById(R.id.Signuptxt);
         final Button Loginbt = findViewById(R.id.Loginbt);
-        Button Signupbt =  findViewById(R.id.Signupbt);
+
         final Button Loginwithemailbt =  findViewById(R.id.LoginwithEmailbt);
         final Button Loginwithphonebt =  findViewById(R.id.LoginwithPhonebt);
     Loginwithemailbt.setVisibility(View.GONE);

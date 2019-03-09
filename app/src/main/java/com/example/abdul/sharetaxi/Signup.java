@@ -25,7 +25,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +62,7 @@ public class Signup extends AppCompatActivity {
     public  String email="",Password="", Cnicnumber="",Carnumber="",Carcolour="",
             Carmodel="";
     private FirebaseAuth mAuth;
+    LinearLayout imageuperlayout;
     Uri URI;
     private String TAG ="iamtag";
     FirebaseUser firebaseUser ;
@@ -133,9 +136,12 @@ public class Signup extends AppCompatActivity {
         Cninumbertxt.setVisibility(View.INVISIBLE);
         Proceeddriverbt.setVisibility(View.INVISIBLE);
         progressDialog = new ProgressDialog(Signup.this);
+        imageuperlayout= findViewById(R.id.imageuperlayout);
 
          Driversimage.setVisibility(View.INVISIBLE);
+         imageuperlayout.setVisibility(View.INVISIBLE);
         Driversimage.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 ShowImgdialog();
@@ -209,9 +215,9 @@ public class Signup extends AppCompatActivity {
         db.child(Uid).child("Carmodel").setValue(Carmodel);
         db.child(Uid).child("Carcolour").setValue(Carcolour);
         db.child(Uid).child("DriverCnincno").setValue(Cnicnumber);
-
+        db.child(Uid).child("Catagory").setValue(Catagory);
         Log.e(Tag,"Car Detalis uploaded");
-        Toast toast = Toast.makeText(Signup.this,"Driver Succesfuly Login",Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(Signup.this,"Driver Succesfuly Signup",Toast.LENGTH_LONG);
         toast.show();
         progressDialog.dismiss();
 
@@ -232,7 +238,7 @@ public class Signup extends AppCompatActivity {
 
     private void SignupUser() {
         Log.e(Tag, String.valueOf("Inside Signup user"));
-        progressDialog.setMessage("Signing In");
+        progressDialog.setMessage("Signing Up");
         progressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(Email,Password)
@@ -312,6 +318,7 @@ public class Signup extends AppCompatActivity {
         db.child(Uid).child("Email").setValue(Email);
         db.child(Uid).child("Password").setValue(Password);
         db.child(Uid).child("Name").setValue(Name);
+        db.child(Uid).child("Catagory").setValue(Catagory);
 
         Log.e(Tag,"DATA UPLOADLOADED TO DATABASE");
        progressDialog.dismiss();
@@ -397,7 +404,7 @@ public class Signup extends AppCompatActivity {
                     Log.e(Tag,"Drivers data Enterd");
 
                 progressBar.setVisibility(View.VISIBLE);
-                //ShowImgdialog();
+                //ShowImgdialog();n
 
             }
         });
@@ -415,7 +422,7 @@ public class Signup extends AppCompatActivity {
     }
 
     private void ShowImgdialog() {
-        final CharSequence[] items={"Camera","Gallery","Cancel"};
+        final CharSequence[] items={"Camera"};
         Log.e(Tag,"Drivers Fields"+String.valueOf(DriverEmptyfields));
 
         AlertDialog.Builder  builder = new AlertDialog.Builder(Signup.this);
@@ -555,6 +562,7 @@ public class Signup extends AppCompatActivity {
         Carmodeltxt.setVisibility(View.VISIBLE);
         Cninumbertxt.setVisibility(View.VISIBLE);
         Driversimage.setVisibility(View.VISIBLE);
+        imageuperlayout.setVisibility(View.VISIBLE);
         DialogProceedbt.setVisibility(View.VISIBLE);
         Proceeddriverbt.setVisibility(View.VISIBLE);
         Signupbt.setVisibility(View.GONE);

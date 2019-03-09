@@ -7,6 +7,11 @@
     android:background="@color/light"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/imageuperlayout"
+        android:layout_width="match_parent"
+        android:layout_height="202dp"
+        android:background="@color/White"></LinearLayout>
     <EditText
         android:id="@+id/EMAIL"
         android:layout_width="wrap_content"
@@ -40,6 +45,7 @@
             android:id="@+id/editText_carrierNumber1"
             android:layout_width="109dp"
             android:layout_height="wrap_content"
+            android:maxLength="11"
             android:editable="false"
             android:hint="phone"
             android:inputType="phone"
@@ -120,6 +126,7 @@
         android:id="@+id/phonenumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLength="11"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="57dp"
@@ -132,20 +139,23 @@
 
     <EditText
         android:id="@+id/cnicno"
+      android:maxLength="14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/carnumber"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="18dp"
         android:ems="10"
+
         android:hint="EnterCnicno"
-        android:inputType="textPersonName|number" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/carcolour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/carmodel"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="18dp"
         android:ems="10"
         android:hint="Car Colour"
         android:inputType="textPersonName" />
@@ -155,7 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/carcolour"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="18dp"
         android:ems="10"
         android:hint="CarNumber"
         android:inputType="textPersonName" />
@@ -165,8 +175,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="184dp"
+        android:layout_alignStart="@+id/cnicno"
+        android:layout_marginBottom="183dp"
         android:ems="10"
         android:hint="Car Model"
         android:inputType="textPersonName" />

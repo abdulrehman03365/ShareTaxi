@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">ShareTaxi</string>
+    <string name="Google_Maps_Api_Key">AIzaSyChVjlGfpCRW5hHStlEKuiDdF1Hruy0smI</string>
     <string name="Loginbt">Login</string>
+    <string name="Enterstring">Enter Your Phone Number</string>
     <string name="Signupbt">Signupbt</string>
     <string name="Title">Share Taxi</string>
     <string name="Loginbt2">Login</string>
@@ -24,5 +26,7 @@
     <string name="action_settings">Settings</string>
     <string name="phonenum">+923032567162</string>
     <string name="phonenumstring">phoennumstring</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps2">Map</string>
 
 </resources>
