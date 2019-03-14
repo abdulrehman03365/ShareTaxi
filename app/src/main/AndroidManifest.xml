@@ -35,10 +35,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-        <activity android:name=".DriversActivity"></activity>
-        <activity android:name=".MapsActivity"
+
+        <activity android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:label="@string/title_activity_maps">
+            android:label= "@string/title_activity_maps">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,6 +52,7 @@
         <activity android:name=".PhoneAuthentication" />
         <activity android:name=".LoginwithPhone" />
         <activity android:name=".LinkphonewithCredential" />
+        <activity android:name=".DriverActivity"/>
         <activity
             android:name=".MapScreen"
             android:label="@string/title_activity_map_screen"
@@ -69,7 +70,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".RiderActivity"
              />
     </application>
 

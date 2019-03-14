@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,6 +43,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.hbb20.CountryCodePicker;
@@ -52,6 +54,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.ByteArrayOutputStream;
+import java.net.URL;
 import java.util.List;
 
 public class Signup extends AppCompatActivity {
@@ -79,7 +82,7 @@ public class Signup extends AppCompatActivity {
     private String Uid="";
     private String Phnumformat="^\\+";
     private boolean DriverEmptyfields;
-    //StorageReference storageReference;
+    StorageReference storageReference;
     CountryCodePicker ccp;
     EditText editTextCarrierNumber;
     CharSequence[] items;
@@ -91,6 +94,9 @@ public class Signup extends AppCompatActivity {
     private int PERMISSION_CODE=2;
     private boolean imageupload=true;
     private boolean checkemptydriverfields;
+    private UploadTask uploadTask;
+    private Task<Uri> imagedownloadurl;
+    private Uri downloadUri;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -109,9 +115,8 @@ public class Signup extends AppCompatActivity {
         extras = getIntent().getExtras();
         if (extras != null) {
             Catagory = extras.getString("Catagory");
-            Log.e(Tag, String.valueOf(Catagory));
+            Log.i(Tag, String.valueOf(Catagory));
         }
-
 
 
 
@@ -138,8 +143,8 @@ public class Signup extends AppCompatActivity {
         progressDialog = new ProgressDialog(Signup.this);
         imageuperlayout= findViewById(R.id.imageuperlayout);
 
-         Driversimage.setVisibility(View.INVISIBLE);
-         imageuperlayout.setVisibility(View.INVISIBLE);
+        Driversimage.setVisibility(View.INVISIBLE);
+        imageuperlayout.setVisibility(View.INVISIBLE);
         Driversimage.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -216,6 +221,16 @@ public class Signup extends AppCompatActivity {
         db.child(Uid).child("Carcolour").setValue(Carcolour);
         db.child(Uid).child("DriverCnincno").setValue(Cnicnumber);
         db.child(Uid).child("Catagory").setValue(Catagory);
+        db.child(Uid).child("downloadimageurl").setValue(String.valueOf(downloadUri)).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) { Log.i(Tag,"imageurl uploadcompleta");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i(Tag,e.getMessage());
+            }
+        });
         Log.e(Tag,"Car Detalis uploaded");
         Toast toast = Toast.makeText(Signup.this,"Driver Succesfuly Signup",Toast.LENGTH_LONG);
         toast.show();
@@ -249,7 +264,7 @@ public class Signup extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.e(TAG, "createUserWithEmail:success");
                             //    FirebaseUser user = mAuth.getCurrentUser();
-                           progressDialog.dismiss();
+                            progressDialog.dismiss();
 
                             //  Toast.makeText(Signup.this, "Succesfully Signup.", Toast.LENGTH_SHORT).show();
                             //
@@ -257,14 +272,14 @@ public class Signup extends AppCompatActivity {
 
                             Uploadinguserdata();
 
-                             progressDialog.dismiss();
-                          //  progressBar.setVisibility(View.INVISIBLE);
+                            progressDialog.dismiss();
+                            //  progressBar.setVisibility(View.INVISIBLE);
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e(TAG, "createUserWithEmail:failure", task.getException());
 
-                           // progressBar.setVisibility(View.INVISIBLE);
+                            // progressBar.setVisibility(View.INVISIBLE);
                             progressDialog.dismiss();
 
                             Toast.makeText(Signup.this, String.valueOf(task.getException()), Toast.LENGTH_SHORT).show();
@@ -309,6 +324,7 @@ public class Signup extends AppCompatActivity {
     private void Uploadinguserdata() {
         Log.e(Tag, String.valueOf("Inside Uploadinguserdata"));
 
+
         db=FirebaseDatabase.getInstance().getReference(Catagory);
         mAuth=FirebaseAuth.getInstance();
         firebaseUser=mAuth.getCurrentUser();
@@ -321,7 +337,7 @@ public class Signup extends AppCompatActivity {
         db.child(Uid).child("Catagory").setValue(Catagory);
 
         Log.e(Tag,"DATA UPLOADLOADED TO DATABASE");
-       progressDialog.dismiss();
+        progressDialog.dismiss();
         //progressBar.setVisibility(View.INVISIBLE);
         Showdialogbox();
 
@@ -481,12 +497,12 @@ public class Signup extends AppCompatActivity {
                     Log.e(TAG,String.valueOf(URI));
 
                     Glide.with(this).load(bmp).into(Driversimage);
-                    //Driversimage.setImageBitmap(bmp);
+                    //Ridersimage.setImageBitmap(bmp);
                     uploadimage(URI);
                 } else if (requestCode == SElect_FILE) {
                     Uri imageuri = data.getData();
                     Glide.with(this).load(imageuri).into(Driversimage);
-                    //Driversimage.setImageURI(imageuri);
+                    //Ridersimage.setImageURI(imageuri);
 
 
                     uploadimage(imageuri);
@@ -509,19 +525,19 @@ public class Signup extends AppCompatActivity {
 
     private void uploadimage(Uri URI)
     {
-        StorageReference storage;
-        storage= FirebaseStorage.getInstance().getReference();
+
+        storageReference= FirebaseStorage.getInstance().getReference();
         this.URI=URI;
-        Log.d(Tag,String.valueOf(this.URI));
+        Log.d(Tag,"image path uri" + " " + String.valueOf(this.URI));
         FirebaseUser currentUser= mAuth.getCurrentUser();
-        StorageReference storageRef = storage.child(currentUser.getUid() + "/" + "Profilepic").child(this.URI.getLastPathSegment());
+         storageReference = storageReference.child(currentUser.getUid() + "/" + "Profilepic");
  /* DatabaseReference databaseRefere;
 
     storageRef=storageRef.child(currentUser.getUid() + "/" + "Profilepic").child(URI.getLastPathSegment());*/
- progressDialog.setMessage("Image Uploading");
- progressDialog.show();
+        progressDialog.setMessage("Image Uploading");
+        progressDialog.show();
 
-        storageRef.putFile(URI).addOnFailureListener(new OnFailureListener() {
+        storageReference.putFile(URI).addOnFailureListener(new OnFailureListener() {
 
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -534,8 +550,25 @@ public class Signup extends AppCompatActivity {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Log.d(TAG,"Profile image UPLOADED");
                 imageupload=false;
+                storageReference.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                       // Log.i("iamtag",e.getMessage());
 
-               progressDialog.dismiss();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+
+                        downloadUri = task.getResult();
+                        Log.i("iamtag",String.valueOf("Urldowncomp" + downloadUri));
+
+
+
+                    }
+                });
+
+                progressDialog.dismiss();
                 Toast toast = Toast.makeText(Signup.this,"Image uploaded",Toast.LENGTH_LONG);
                 toast.show();
 
@@ -545,9 +578,6 @@ public class Signup extends AppCompatActivity {
 
         });
 
-
-        //StorageReference storageRef =;
-        //Intent intent = new Intent(Intent.ACTION_PICK,)
 
     }
 

@@ -60,6 +60,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
         if(Code!=" ") {
             phoneAuthCredential = PhoneAuthProvider.getCredential(mverificationId, Code);
         }
+
             mAuth.getCurrentUser().linkWithCredential(phoneAuthCredential);
 
         Log.e(tag,"Succesfuly linked with credential");

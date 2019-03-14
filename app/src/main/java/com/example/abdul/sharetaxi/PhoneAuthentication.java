@@ -3,7 +3,6 @@ package com.example.abdul.sharetaxi;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,11 +21,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -286,19 +282,19 @@ public class PhoneAuthentication extends AppCompatActivity {
                       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                           if( dataSnapshot.getValue()!=null)
                           {
-                              Log.i(tag,String.valueOf(dataSnapshot.getValue()));
+                              Log.i(tag,"checking categry of login user cat ="+ String.valueOf(dataSnapshot.getValue()));
                               //Toast.makeText(PhoneAuthentication.this, String.valueOf(dataSnapshot.getValue()), Toast.LENGTH_LONG).show();
 
                               if("Driver"==String.valueOf(dataSnapshot.getValue()))
                               {
                                   progressDialog.dismiss();
-                                  Intent intent = new Intent(PhoneAuthentication.this,DriversActivity.class);
+                                  Intent intent = new Intent(PhoneAuthentication.this, DriverActivity.class);
                                   startActivity(intent);
                               }
                               else if("Rider"==String.valueOf(dataSnapshot.getValue()))
                               {
                                   progressDialog.dismiss();
-                                  Intent intent = new Intent(PhoneAuthentication.this,MapsActivity.class);
+                                  Intent intent = new Intent(PhoneAuthentication.this, RiderActivity.class);
                                   startActivity(intent);
                               }
 
