@@ -1,17 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+   android:id="@+id/DriverDrawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DriverActivity">
 
-
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:text="Driver"
-        android:textSize="40dp"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <fragment
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/drivermap"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".DriverActivity"
+
+            />
+
+
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarDriver"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/autocompletecard"
+            android:layout_marginTop="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <fragment
+                android:id="@+id/dest_autocomp_fragment_Driver"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignStart="@+id/autocompletecard" />
+        </android.support.v7.widget.CardView>
+
+        <Switch
+            android:id="@+id/switchOnline"
+            style="@style/SCBSwitch"
+            android:layout_width="wrap_content"
+ android:layout_alignParentRight="true"
+
+            android:layout_height="72dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="4dp"
+            android:text="Online/ffline   "
+            android:textColor="@color/Black"
+            android:textSize="24dp" />
+
+
+      <RelativeLayout
+       android:id="@+id/Customer_detail"
+          android:layout_marginLeft="@dimen/fab_margin"
+          android:layout_marginRight="@dimen/fab_margin"
+          android:layout_marginBottom="@dimen/fab_margin"
+          android:layout_width="wrap_content"
+
+          android:layout_alignParentBottom="true"
+          android:background="@color/White"
+          android:layout_height="wrap_content">
+
+          <include
+
+
+              layout="@layout/customer_detail"
+
+              android:id="@+id/include_id"
+              >
+
+          </include>
+      </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="start"
+        android:id="@+id/DriverNavView"
+        app:menu="@menu/activity_map_screen_drawer"
+        >
+
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

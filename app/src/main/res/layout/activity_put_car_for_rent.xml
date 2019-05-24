@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PutCarForRent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_below="@id/toolbar2"
+        android:id="@+id/namelinear"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+
+
+        <TextView
+    android:layout_width="wrap_content"
+    android:text="Toyota Fortunar"
+    android:id="@+id/CarModeltitle"
+    android:textSize="@dimen/fab_margin"
+    android:layout_height="wrap_content" />
+
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            android:layout_width="184dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/CarModeltitle"
+            android:layout_marginTop="-4dp"
+            android:layout_marginRight="54dp"
+
+            android:outlineAmbientShadowColor="@color/light"
+             />
+
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+       android:id="@+id/ImageRel"
+        android:layout_below="@+id/namelinear"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/carimage"
+            android:layout_width="match_parent"
+
+            android:layout_height="205dp"
+            app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/Car_Detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ImageRel"
+
+        android:gravity="start"
+
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:id="@+id/Car_DetailLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal"
+            android:padding="@dimen/fab_margin"
+            android:text="TextView"
+
+
+            />
+
+        <RelativeLayout
+            android:id="@+id/Car_DetailLi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal"
+            android:padding="@dimen/fab_margin"
+            android:text="TextView"
+
+
+            >
+
+            <TextView
+                android:id="@+id/Automatic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Manual/Automatic" />
+
+
+            <Switch
+                android:id="@+id/SwitchAuto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Car_DetlLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal"
+            android:padding="@dimen/fab_margin"
+            android:text="TextView"
+
+
+            >
+
+            <TextView
+                android:id="@+id/Milage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Milage" />
+
+
+            <EditText
+                android:id="@+id/Milagetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:hint="1000km" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/PutforRentbt"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Car_Detail"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bordertheme"
+        android:paddingTop="10dp"
+
+        android:text="Put to Rent" />
+
+
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:showIn="navigation_view">
+
+
+
+        <group>
+
+            <item
+                android:id="@+id/FindRentcar"
+                android:icon="@drawable/ic_directions_car_black_24dp"
+                android:title="Find Car for Rent" />
+
+
+            <item
+                android:id="@+id/History"
+                android:icon="@drawable/ic_history_black_24dp"
+                android:title="History" />
+
+
+            <item
+                android:id="@+id/SettingRider"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="Settings" />
+
+
+
+
+            <item
+                android:id="@+id/ReviewsRider"
+                android:icon="@drawable/reviews"
+                android:title="Reviews" />
+
+
+            <item
+                android:id="@+id/LogoutRider"
+                android:icon="@drawable/logout"
+                android:title="Logout" />
+
+
+
+        </group>
+</menu>

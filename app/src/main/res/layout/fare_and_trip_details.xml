@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/parentlinear"
+    android:paddingTop="@dimen/fab_margin"
+ android:paddingLeft="@dimen/fab_margin"
+  android:paddingEnd="@dimen/fab_margin"
+    android:paddingRight="@dimen/fab_margin"
+    android:layout_width="match_parent"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="164dp"
+        android:layout_height="79dp"
+        android:id="@+id/seatsRel"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="25dp">
+
+        <TextView
+            android:id="@+id/seatsAvial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Seats Available"
+
+            android:textColor="@color/Black"
+            android:textSize="20dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="277dp"
+            android:layout_marginRight="277dp"
+            android:id="@+id/seatsavialable"
+            android:drawableLeft="@drawable/ic_airline_seat_recline_extra_black_24dp"
+            android:text="4"
+            android:textColor="#9e9e9e"
+            android:textSize="26dp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="164dp"
+        android:layout_height="79dp"
+        android:id="@+id/costrel"
+        app:layout_constraintLeft_toRightOf="@+id/seatsRel"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="25dp">
+
+        <TextView
+            android:id="@+id/Est_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Est Cost"
+            android:textColor="@color/Black"
+            android:textSize="20dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="277dp"
+            android:layout_marginRight="277dp"
+            android:id="@+id/cost"
+            android:hint="100"
+            android:textColor="#9e9e9e"
+            android:textSize="26dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="58dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+android:hint="Pkr"
+            android:textSize="22dp"
+            android:layout_marginRight="0dp"
+             />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_height="wrap_content"
+        android:id="@+id/chooserel"
+     app:layout_constraintTop_toBottomOf="@id/costrel"
+        >
+
+        <EditText
+            android:id="@+id/choosetxt"
+            android:layout_width="wrap_content"
+        android:inputType="number"
+            android:layout_height="wrap_content"
+           android:singleLine="true"
+            android:hint="Choose seat"
+            android:textColor="@color/Black"
+            android:textSize="20dp" />
+
+
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/ConfirmPickupBt"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:background="@color/light"
+        android:gravity="center"
+        android:text="Fare Estimate"
+        app:layout_constraintTop_toBottomOf="@id/chooserel"
+        tools:layout_editor_absoluteX="25dp" />
+
+    <Button
+        android:id="@+id/RequestPickup"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="28dp"
+        android:background="@color/light"
+        android:text="Request Pickup"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toRightOf="@id/ConfirmPickupBt"
+        app:layout_constraintTop_toBottomOf="@id/chooserel" />
+</android.support.constraint.ConstraintLayout>

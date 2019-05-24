@@ -17,6 +17,8 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,12 +29,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,21 +43,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.hbb20.CountryCodePicker;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.ByteArrayOutputStream;
-import java.net.URL;
-import java.util.List;
 
 public class Signup extends AppCompatActivity {
+    private static final int CAMERA_PERMISSION = 22;
+    private static final int PICK_IMAGE = 11;
     Intent intent;
     static String Catagory;
     Dialog Emailverpopup;
@@ -88,15 +82,18 @@ public class Signup extends AppCompatActivity {
     CharSequence[] items;
     private int i;
     ProgressDialog progressDialog;
-    private int REQUEST_CAMERA=0;
+    public static  final int REQUEST_CAMERA=0;
+
     private int SElect_FILE=1;
-    private int REQUEST_External=11;
+    private static final int REQUEST_External=11;
     private int PERMISSION_CODE=2;
     private boolean imageupload=true;
     private boolean checkemptydriverfields;
     private UploadTask uploadTask;
     private Task<Uri> imagedownloadurl;
     private Uri downloadUri;
+    private DatabaseReference rentaCarRef;
+    private boolean externalPermissionGranted, camerPermissionGranted;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -155,6 +152,7 @@ public class Signup extends AppCompatActivity {
         ccp = (CountryCodePicker) findViewById(R.id.ccp1);
         editTextCarrierNumber = findViewById(R.id.editText_carrierNumber1);
 
+        checkforpermission();
         ccp.registerCarrierNumberEditText(editTextCarrierNumber);
 
         Signupbt.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +219,8 @@ public class Signup extends AppCompatActivity {
         db.child(Uid).child("Carcolour").setValue(Carcolour);
         db.child(Uid).child("DriverCnincno").setValue(Cnicnumber);
         db.child(Uid).child("Catagory").setValue(Catagory);
-        db.child(Uid).child("downloadimageurl").setValue(String.valueOf(downloadUri)).addOnCompleteListener(new OnCompleteListener<Void>() {
+        db.child(Uid).child("downloadimageurl").setValue(String.valueOf(downloadUri)).addOnCompleteListener(
+                new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) { Log.i(Tag,"imageurl uploadcompleta");
             }
@@ -404,12 +403,12 @@ public class Signup extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.CAMERA},
                     REQUEST_CAMERA);
         }
-
+*/
         if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_External);
-        }*/
+        }
         DialogProceedbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -436,30 +435,39 @@ public class Signup extends AppCompatActivity {
 
 
     }
-
     private void ShowImgdialog() {
-        final CharSequence[] items={"Camera"};
-        Log.e(Tag,"Drivers Fields"+String.valueOf(DriverEmptyfields));
+        final CharSequence[] items = {"Camera", "Gallery"};
 
-        AlertDialog.Builder  builder = new AlertDialog.Builder(Signup.this);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Signup.this);
         builder.setTitle("Select Image");
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(items[i].equals("Camera"))
-                {
 
 
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    //intent.setType("images/*");
-                    //           checkforpermission();
-                    startActivityForResult(intent,REQUEST_CAMERA);
+                switch (which) {
+                    case 0
+                            :
+                    {
 
-                }
-                else if(items[i].equals("Cancel"))
-                {
-                    dialog.dismiss();
+
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        //intent.setType("images/*");
+                        //           checkforpermission();
+                        startActivityForResult(intent, REQUEST_CAMERA);
+                        break;
+                    }
+                    case 1:
+                    {
+                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/*");
+
+                        startActivityForResult(intent, PICK_IMAGE);
+
+                        break;
+                    }
                 }
             }
         });
@@ -467,58 +475,48 @@ public class Signup extends AppCompatActivity {
     }
 
 
-
-
-    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        try{
+        try {
 
 
+            if (requestCode == REQUEST_CAMERA && resultCode == Activity.RESULT_OK) {
 
-            if (resultCode == Activity.RESULT_OK) {
-                if (requestCode == REQUEST_CAMERA ) {
-                    // Uri    URI=  data.getData();
-                    Bundle bundle = data.getExtras();
-                    //      Uri  imageURI= (Uri) bundle.get("data");
+                Bundle bundle = data.getExtras();
 
 
-                    //
-                    Bitmap bmp = (Bitmap) bundle.get("data");
+                Bitmap bmp = (Bitmap) bundle.get("data");
 
-                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-
-
-                    bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                    String path = MediaStore.Images.Media.insertImage(Signup.this.getContentResolver(),
-                            bmp, "Temp", null);
-                    URI=Uri.parse(path);
-
-                    Log.e(TAG,String.valueOf(URI));
-
-                    Glide.with(this).load(bmp).into(Driversimage);
-                    //Ridersimage.setImageBitmap(bmp);
-                    uploadimage(URI);
-                } else if (requestCode == SElect_FILE) {
-                    Uri imageuri = data.getData();
-                    Glide.with(this).load(imageuri).into(Driversimage);
-                    //Ridersimage.setImageURI(imageuri);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
 
-                    uploadimage(imageuri);
-                }
+                bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String path = MediaStore.Images.Media.insertImage(Signup.this.getContentResolver(),
+                        bmp, "Temp", null);
+                URI = Uri.parse(path);
 
+                Log.e(TAG, String.valueOf(URI));
 
-
+                Glide.with(this).load(bmp).into(Driversimage);
+                //Ridersimage.setImageBitmap(bmp);
+                uploadimage(URI);
+            }
+            else if (requestCode == PICK_IMAGE &&resultCode==Activity.RESULT_OK)
+            {
+                Uri image = data.getData();
+                Glide.with(this).load(image).into(Driversimage);
+                uploadimage(image);
             }
 
 
-        }
-        catch (Exception e)
-        {
-            Log.e(Tag,String.valueOf(e.getMessage()));
+        } catch (Exception e) {
+            Log.e(TAG, String.valueOf(e.getMessage()));
         }
     }
+
+
+
 
 
 
@@ -564,7 +562,6 @@ public class Signup extends AppCompatActivity {
                         Log.i("iamtag",String.valueOf("Urldowncomp" + downloadUri));
 
 
-
                     }
                 });
 
@@ -601,12 +598,40 @@ public class Signup extends AppCompatActivity {
         Nametext.setVisibility(View.GONE);
         Emailtext.setVisibility(View.GONE);
         Passwordtext.setVisibility(View.GONE);
-        checkforpermission();
+       // checkforpermission();
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkforpermission() {
+
+
+        if (ContextCompat.checkSelfPermission(Signup.this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(Signup.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+        )
+
+
+            {
+
+                ActivityCompat.requestPermissions(Signup.this,
+                        new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_PERMISSION);
+
+
+
+
+            }
+
+
+
+
+
+
+
+      /*
         Log.e(TAG,"Asking for permissions");
 
         Dexter.withActivity(this)
@@ -652,30 +677,13 @@ public class Signup extends AppCompatActivity {
             }
 
         }).check();
-
-
-    /*
-
-        String[]  permissions ={Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        if(getApplicationContext().checkSelfPermission(
-                permissions[0])!=PackageManager.PERMISSION_GRANTED
-                &&(ContextCompat.checkSelfPermission(Signup.this,
-                permissions[1])!=PackageManager.PERMISSION_GRANTED
-        ))
-        {
-            ActivityCompat.requestPermissions(Signup.this,permissions,PERMISSION_CODE);
-        }
-        else
-        {
-            Log.e(TAG,"PERMISSION GRANTED");
-        }
-
 */
 
 
-    }
+        }
 
-    private void opensetting() {
+    private void opensetting()
+    {
 
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri =  Uri.fromParts("package",getPackageName(),null);
@@ -683,20 +691,25 @@ public class Signup extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
+
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
 
-        boolean cam = grantResults[0]!=PackageManager.PERMISSION_GRANTED;
-
-        boolean store = grantResults[1]!=PackageManager.PERMISSION_GRANTED;
-        if(store==false || cam ==false)
+        switch (requestCode)
         {
-            checkforpermission();
-        }
+            case CAMERA_PERMISSION:
+            {
+                if (grantResults[0]==PackageManager.PERMISSION_DENIED || grantResults[1]==PackageManager.PERMISSION_DENIED)
+                {
+                    opensetting();
+                }
 
+
+
+            }
+
+        }
     }
 
     private boolean checkemptydriverfields() {

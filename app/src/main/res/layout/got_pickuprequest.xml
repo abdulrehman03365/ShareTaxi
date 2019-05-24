@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light"
+    android:gravity="center"
+    android:layout_marginTop="@dimen/fab_margin"
+    android:layout_marginBottom="@dimen/fab_margin"
+    android:layout_marginLeft="@dimen/fab_margin"
+    android:layout_marginRight="@dimen/fab_margin"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerVertical="true"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView4"
+       android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/ic_car_web" />
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+     android:orientation="horizontal"
+      android:layout_height="wrap_content">
+
+
+      <TextView
+          android:id="@+id/textView5"
+          android:layout_width="wrap_content"
+      android:textSize="@dimen/fab_margin"
+      android:textColor="@color/Black"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Location"
+          />
+
+      <TextView
+          android:id="@+id/LocationTxtv"
+          android:layout_width="wrap_content"
+          android:layout_marginLeft="100dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:textSize="@dimen/fab_margin"
+          android:text="TextView" />
+  </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/TimeEstLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        android:textColor="@color/Black"
+            android:layout_weight="1"
+            android:text="TimeEst"
+            android:textSize="@dimen/fab_margin" />
+
+        <TextView
+            android:id="@+id/TimeEstTxtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_weight="1"
+            android:text="TimeEst"
+            android:textSize="@dimen/fab_margin" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/Distlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Black"
+            android:layout_weight="1"
+            android:text="Distance"
+            android:textSize="@dimen/fab_margin" />
+
+        <TextView
+            android:id="@+id/DistanceTxtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_weight="1"
+            android:text="Distance"
+            android:textSize="@dimen/fab_margin" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+</RelativeLayout>

@@ -5,15 +5,46 @@
 
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+
+        android:checkableBehavior="single">
+
         <item
             android:id="@+id/Rentcarid"
+
+
             android:icon="@drawable/ic_directions_car_black_24dp"
             android:title="Rent car" />
+
+
+
         <item
-            android:id="@+id/Become_Lessorid"
-            android:icon="@drawable/ic_local_taxi_black_24dp"
-            android:title="Become Lessor" />
+            android:id="@+id/SettingsDriver"
+
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Settings" />
+
+
+        <item
+            android:id="@+id/HistoryDriver"
+
+            android:icon="@drawable/ic_history_black_24dp"
+            android:title="History" />
+
+
+
+        <item
+            android:id="@+id/ReviewsDriver"
+            android:icon="@drawable/reviews"
+            android:title="Driver" />
+
+        <item
+            android:id="@+id/LogoutDriver"
+
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+
+
 
     </group>
 
